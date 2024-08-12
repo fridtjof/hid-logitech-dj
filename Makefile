@@ -1,7 +1,7 @@
 KVERSION := `uname -r`
 KDIR := /lib/modules/${KVERSION}/build
 
-LSMOD_GREP = $(shell lsmod | grep "hid_logitech_hidpp")
+LSMOD_GREP = $(shell lsmod | grep "hid_logitech_dj")
 LSUSB_GREP = $(shell lsusb | grep "Logitech, Inc. PRO Racing Wheel")
 
 
@@ -11,14 +11,14 @@ default:
 install: default
 	$(MAKE) -C $(KDIR) M=$$PWD modules_install
 	depmod -A
-	insmod ./hid-logitech-hidpp.ko
+	insmod ./hid-logitech-dj.ko
 
 uninstall:
 ifeq ($(LSMOD_GREP),)
 	@echo "module not installed, doing nothing"; \
 	exit 1
 else
-	@echo "hid_logitech_hidpp module is installed, attempting to remove"
+	@echo "hid_logitech_dj module is installed, attempting to remove"
 endif
 
 ifeq ($(LSUSB_GREP),)
@@ -32,7 +32,7 @@ endif
 
 ifeq ($(shell id -u), 0)
 	@echo "user is superuser, removing module"
-	rmmod hid-logitech-hidpp
+	rmmod hid-logitech-dj
 else
 	@echo "ERROR: must uninstall as superuser"
 	exit 1
@@ -40,4 +40,3 @@ endif
 
 clean:
 	$(MAKE) -C $(KDIR) M=$$PWD clean
-
