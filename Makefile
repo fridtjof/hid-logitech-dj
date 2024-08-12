@@ -2,7 +2,7 @@ KVERSION := `uname -r`
 KDIR := /lib/modules/${KVERSION}/build
 
 LSMOD_GREP = $(shell lsmod | grep "hid_logitech_dj")
-LSUSB_GREP = $(shell lsusb | grep "Logitech, Inc. PRO Racing Wheel")
+LSUSB_GREP = $(shell lsusb | grep "046d:c547 Logitech, Inc. USB Receiver")
 
 
 default:
