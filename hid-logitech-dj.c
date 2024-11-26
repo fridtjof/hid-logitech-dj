@@ -13,7 +13,12 @@
 #include <linux/kfifo.h>
 #include <linux/delay.h>
 #include <linux/usb.h> /* For to_usb_interface for kvm extra intf check */
+#include <linux/version.h>
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6,12,0)
 #include <asm/unaligned.h>
+#else
+#include <linux/unaligned.h>
+#endif
 #include "hid-ids.h"
 
 #define DJ_MAX_PAIRED_DEVICES			7
